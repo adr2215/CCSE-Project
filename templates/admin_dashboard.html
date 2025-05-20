@@ -1,0 +1,38 @@
+<head>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+{% extends "base.html" %} {% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('admin.home') }}">Home</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="dashboard-card">
+        <h2>Manage Products</h2>
+        <p>Add, edit, or remove products from the store.</p>
+        <a href="{{ url_for('admin.add_product') }}" class="btn">Add Product</a>
+    </div>
+
+    <div class="dashboard-card">
+        <h2>Orders</h2>
+        <p>View and manage customer orders.</p>
+        <a href="{{ url_for('admin.view_orders') }}" class="btn">View Orders</a>
+    </div>
+
+    <div class="dashboard-card">
+        <h2>Users</h2>
+        <p>Manage user accounts and permissions.</p>
+        <a href="{{ url_for('admin.manage_users') }}" class="btn">Manage Users</a>
+    </div>
+</main>
+
+{% endblock %}

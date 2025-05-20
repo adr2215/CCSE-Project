@@ -1,0 +1,25 @@
+<head>
+    <link rel="stylesheet" href="/static/products.css">
+</head>
+
+{% extends "base.html"%} {%block title %}Home{%endblock%} {%block content%}
+<header>
+    <nav>
+        <a href="{{ url_for('home.view_cart') }}">Cart</a>
+        <a href ="{{ url_for('auth.logout')}}">Logout</a>
+    </nav>
+</header>
+
+<h1>Welcome to the Store</h1>
+<div class="products">
+    {% for product in products %}
+        <div class="product">
+            <h2>{{ product.name }}</h2>
+            <img src="{{url_for('static',filename = product.image_url)}}"/>
+            <p>{{ product.description }}</p>
+            <p>£{{ product.price }}</p>
+            <a href="{{ url_for('home.product_detail', product_id=product.id) }}">View Details</a>
+        </div>
+    {% endfor %}
+</div>
+{%endblock%}

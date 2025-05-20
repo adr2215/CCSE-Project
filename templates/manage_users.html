@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <header>
+        <nav>
+            <a href="{{ url_for('home.homepage') }}">Home</a>
+            <a href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <h2 class="mb-4">User Management</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <form action="{{ url_for('admin.update_role', user_id=user.id) }}" method="post">
+                        <select name="role" class="form-select" {% if user.id == current_user.id %}disabled{% endif %}>
+                            {% for role in all_roles %}
+                            <option value="{{ role.name }}" {% if role in user.roles %}selected{% endif %}>
+                                {{ role.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {% if user.id != current_user.id %}
+                        <button type="submit" class="btn btn-primary btn-sm mt-2">Update</button>
+                        {% else %}
+                        <span class="text-muted">Cannot change your own role</span>
+                        {% endif %}
+                    </form>
+                </td>
+                <td>
+                    {% if user.id != current_user.id %}
+                    <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    {% else %}
+                    <span class="text-muted">Cannot delete yourself</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html"%} {%block title %}Add Product{%endblock%} {%block content%}
+
+<header>
+    <nav>
+        <a href="{{ url_for('admin.home') }}">Home</a>
+        <a href="{{ url_for('home.view_cart') }}">Cart</a>
+        <a href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
+        <a href ="{{ url_for('auth.logout')}}">Logout</a>
+    </nav>
+</header>
+
+<form method="POST" enctype="multipart/form-data">
+    <h3 align = "center">Add Product</h3>
+    <div class = 'form-group'>
+        <label for = "product_name">Name</label>
+        <input 
+        type = "product_name" 
+        class = "form-control" 
+        id = "product_name"
+        name = "product_name"
+        placeholder="Enter Product Name"/>
+    </div>
+    <div class = 'form-group'>
+        <label for = "product_description">Description</label>
+        <input 
+        type = "product_description" 
+        class = "form-control" 
+        id = "product_description"
+        name = "product_description"
+        placeholder="Enter Product Description"/>
+    </div>
+    <div class = 'form-group'>
+        <label for = "price">Price</label>
+        <input 
+        type = "price" 
+        class = "form-control" 
+        id = "price"
+        name = "price"
+        placeholder="Enter Price"/>
+    </div>
+    <div class = 'form-group'>
+        <label for = "image">Image</label>
+        <input 
+        type = "file" 
+        class = "image" 
+        id = "image"
+        name = "image"
+        accept="image/*"
+        placeholder="Upload Image"/>
+    </div>
+    <br/>
+    <button type = "submit" class ="btn btn-primary">Submit</button>
+</form>
+
+{%endblock%}

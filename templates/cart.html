@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% block content %}
+<header>
+    <nav>
+        <a href="{{ url_for('home.homepage') }}">Home</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+</header>
+
+<h1>Your Cart</h1>
+
+{% if cart_items %}
+    <ul>
+        {% for item in cart_items %}
+ 
+            <li>
+                <strong>{{ item.product.name }}</strong> - 
+                £{{ item.product.price }} 
+                (Quantity: {{ item.quantity }})
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Total: £{{ "%.2f"|format(total) }}</h2>
+
+    <form action="{{ url_for('home.clear_cart') }}" method="post">
+        <button type="submit" class="button clear-cart">Clear Cart</button>
+    </form>
+
+    <button onclick= "window.location.href = '/home/checkout'" class="button checkout">Checkout</button>
+
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+
+{% endblock %}

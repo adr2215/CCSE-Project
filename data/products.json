@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Laptop",
+        "price": 999.99,
+        "description": "A high-performance laptop.",
+        "image_url": "laptop.jpeg"
+    },
+    {
+        "id": 2,
+        "name": "Headphones",
+        "price": 199.99,
+        "description": "Noise-cancelling headphones.",
+        "image_url": "Headphones.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "Cheese",
+        "price": 6.99,
+        "description": "Some Prime Cheddar",
+        "image_url": "cheese.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Airpods",
+        "price": 699.99,
+        "description": "More subtle listening",
+        "image_url": "airpods.jpg"
+    }
+]

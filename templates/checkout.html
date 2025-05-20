@@ -1,0 +1,50 @@
+{% extends "base.html" %}{% block content %}
+
+<header>
+    <nav>
+        <a href="{{ url_for('home.homepage') }}">Home</a>
+        <a href="{{ url_for('home.view_cart') }}">Cart</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+</header>
+
+<main class="checkout-container">
+    <h1>Checkout</h1>
+
+    {% if cart_items %}
+    <section class="order-summary">
+        <h2>Order Summary</h2>
+        <ul>
+            {% for item in cart_items %}
+            <li>
+                <strong>{{ item['product']['name'] }}</strong> - 
+                £{{ "%.2f"|format(item['product']['price']) }} 
+                (Quantity: {{ item['quantity'] }})
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>Total: £{{ "%.2f"|format(total) }}</h3>
+    </section>
+
+    <section class="checkout-form">
+        <form action="{{ url_for('home.process_checkout') }}" method="post">
+
+            <h2>Payment Method</h2>
+            <label>
+                <input type="radio" name="payment" value="credit_card" checked> Credit/Debit Card
+            </label>
+            <label>
+                <input type="radio" name="payment" value="paypal"> PayPal
+            </label>
+
+            <button type="submit" class="checkout-button">Place Order</button>
+        </form>
+    </section>
+    
+    {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('home.homepage') }}">Go shopping</a></p>
+    {% endif %}
+
+</main>
+
+{% endblock %}
