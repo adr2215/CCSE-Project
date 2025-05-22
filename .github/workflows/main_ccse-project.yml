@@ -46,6 +46,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'ccse-project'
-        slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_48a55d7a8e3e449b83e2dee63c6cf3bb }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_3469cc1dc2ac4462b37cb8033babecf1 }}/adamryan2215/flask-app:${{ github.sha }}'
