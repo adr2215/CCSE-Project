@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/adamryan2215/adamryan2215/flask-app:${{ github.sha }}
+        tags: index.docker.io/adamryan2215/flask-app:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
