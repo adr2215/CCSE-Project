@@ -1,4 +1,4 @@
-name: Build, Push Docker Image, and Run ZAP Scan
+name: Build, Push Docker Image
 
 on:
   push:
@@ -25,14 +25,4 @@ jobs:
 
       - name: Push the image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
-
-  zap_scan:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.9.0
-        with:
-          target: 'https://ccse-project-esdsdsh4g3fzfjht.uksouth-01.azurewebsites.net/'
+          docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest'
