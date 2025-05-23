@@ -6,13 +6,14 @@ from os import path
 db = SQLAlchemy()
 DB_NAME = "Database.db"
 
-def create_app():
+def create_app(config=None):
     app = Flask(__name__)
+    if config:
+        app.config.update(config)
     app.secret_key = 'my_secret_key'
     app.config ['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
     #Initialises the database and establishes a secret key
-
 
     from home import home
     from auth import auth
