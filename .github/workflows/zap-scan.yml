@@ -1,0 +1,28 @@
+name: OWASP ZAP Scan
+
+on:
+  workflow_dispatch:  # Run it manually from the GitHub Actions tab
+  schedule:
+    - cron: '0 2 * * *'  # Optional: run every day at 2 AM UTC
+
+jobs:
+  zap-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for app to be ready
+        run: |
+          for i in {1..10}; do
+            if curl -s --head https://ccse-project-esdsdsh4g3fzfjht.uksouth-01.azurewebsites.net/ | grep "200 OK" > /dev/null; then
+              echo "Site is up!"
+              break
+            fi
+            echo "Waiting for site..."
+            sleep 10
+          done
+
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: 'https://your-app.azurewebsites.net'
+          fail_action: false
